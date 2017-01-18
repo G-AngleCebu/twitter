@@ -21,21 +21,30 @@
 		$text = reverseEngineer(expandResult($tweet));
 
 		$header = headerFormat_reply($tweet);
-		$formatted = $header . nl2br($text)."<div>";
+		$formatted = $header . nl2br($text)."</div>";
 		return $formatted;
 	}
 
 	function tweetFormat_d2($tweet, $text){
 		$formatted = formatWithImage_D($tweet, $text).'<section class="twitter_img_01">';
 		$mediaUrl = $tweet->retweeted_status->extended_entitites->media[0]->media_url;
-
 		if($mediaUrl != ''){
 			$content = file_get_contents($mediaUrl);
 			$file_name = randomStringGenerator();
 			$path =  "images/" .$file_name. ".jpg";
 			file_put_contents($path, $content);
 			$imgsrc = "images/".$file_name.".jpg";
-			$formatted .= '<div><a class="fancybox img_thum" rel="group" href="'.$mediaUrl.'"><img src="'.$imgsrc.'" alt=""></a></div></section></div></div>';
+			$formatted .= '<div>
+							<a class="fancybox img_thum" rel="group" href="'.$mediaUrl.'">
+								<img src="'.$imgsrc.'" alt="">
+							</a>
+							</div>
+							</section>
+							</div>
+							hello this should not be here
+							</div>';
+		}else{
+			$formatted.= '</section></div></div>';
 		}
 
 		return $formatted;

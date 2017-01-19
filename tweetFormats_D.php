@@ -1,6 +1,7 @@
 <?php 
 
 	function formatWithImage_D($tweet, $text){
+
 		include_once "formatJapaneseDate.php";
 		$header = headerFormat_reply($tweet);
 		$text = reverseEngineer(expandResult($tweet));
@@ -16,9 +17,10 @@
 		return $formatted;
 	}
 
-	function formatTweet_d1($tweet, $text) {
+	function formatTweet_d1($tweet) {
+		include_once "formatJapaneseDate.php";
 		$text = reverseEngineer(expandResult($tweet));
-		
+
 		$header = headerFormat_reply($tweet);
 		$formatted = $header . nl2br($text)."</div>";
 		return $formatted;
@@ -26,7 +28,7 @@
 
 	function formatTweet_d2($tweet, $text){
 		$formatted = formatWithImage_D($tweet, $text).'<section class="twitter_img_01">';
-		$mediaUrl = $tweet->retweeted_status->extended_entitites->media[0]->media_url;
+		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
 		if($mediaUrl != ''){
 			$content = file_get_contents($mediaUrl);
 			$file_name = randomStringGenerator();
@@ -40,10 +42,8 @@
 							</div>
 							</section>
 							</div>
-							hello this should not be here
 							</div>';
-		}else{
-			$formatted.= '</section></div></div>';
+
 		}
 
 		return $formatted;
@@ -141,6 +141,7 @@
 	}
 
 	function formatTweet_d6($tweet, $text) {
+		include_once "formatJapaneseDate.php";
 		$header = headerFormat_reply($tweet);
 		$videoUrl = $tweet->extended_entities->media[0]->expanded_url;
 		$displayUrl = $tweet->extended_entities->media[0]->display_url;
@@ -153,6 +154,7 @@
 	}
 
 	function formatTweet_d7($tweet, $text){
+		include_once "formatJapaneseDate.php";
 		$header = headerFormat($tweet);
 		$text = reverseEngineer(breakYoutube($tweet));
 

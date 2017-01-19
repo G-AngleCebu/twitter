@@ -24,7 +24,8 @@ function checkTweetFormat($type, $tweet){
 	if($letter == 'C'){ // if quoted
 		$extended_entities = $tweet->quoted_status->extended_entities;
 		$entity_urls = $tweet->quoted_status->entities;
-	} else {
+	}
+	else {
 		$extended_entities = $tweet->extended_entities;
 		$entity_urls = $tweet->entities;
 	}
@@ -50,6 +51,7 @@ function checkTweetFormat($type, $tweet){
 	elseif((isset($tweet->full_text)) && (count($extended_entities->media) > 0)): //text with media
 		$imagesCt = 0;
 		$videoCt = 0;
+		
 		for($i=0; $i<count($extended_entities->media); $i++){
 			if($extended_entities->media[$i]->type == 'photo'):
 				$imagesCt++;
@@ -65,7 +67,7 @@ function checkTweetFormat($type, $tweet){
 			return $letter.'4';
 		elseif($imagesCt == 4 && $videoCt == 0):
 			return $letter.'5';
-		elseif($videoCt == 1 && $videoCt == 0):
+		elseif($videoCt == 1 && $imagesCt == 0):
 			return $letter.'6';
 		endif;
 	elseif(!(isset($tweet->full_text)) && (count($extended_entities->media) > 0)): //media only

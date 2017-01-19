@@ -17,13 +17,6 @@ function search(array $query){
 	$toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
 
 	return $toa->get('search/tweets', $query);
-
-	// $array_1 = (array) $toa->get('search/tweets', ["q"=>$query[0]]);
-	// $array_2 = (array) $toa->get('search/tweets', ["q"=>$query[1]]);
-	// return (object) array_merge($array_1, $array_2);
-
-	// return (object) array_merge((array) $array_1, (array) $array_2);
-	// return $toa->get('search/tweets', ["q"=>'劇団アルタイル']);
 }
 
 	
@@ -77,7 +70,7 @@ $today = strtotime(date('Y/m/d H:i'));
 
 foreach ($results->statuses as $result) {
 	$tweetDate = $today - strtotime(formatTwitterDate($result->created_at));
-	if($tweetDate <= 691200){ 
+	// if($tweetDate <= 691200){ 
 
 		$tweet_type = checkTweetType($result);
 		$tweetFormat = checkTweetFormat($tweet_type, $result);
@@ -87,6 +80,8 @@ foreach ($results->statuses as $result) {
 		$fulltext = mediaUrls($result, $fulltext3);
 
 		// for testing
+		// echo "<hr/>";
+		// echo "<h1>{$result->id} {$tweet_type} / {$tweetFormat}</h1>";
 		// for testing
 
 		switch ($tweetFormat) {
@@ -252,7 +247,7 @@ foreach ($results->statuses as $result) {
 				break;
 		}
 		
-	}	
+	// }	
 	/*eunicecode*/
 }
 

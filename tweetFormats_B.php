@@ -1,7 +1,5 @@
 <?php 
 
-error_reporting(0);
-
 	function formatTweet_b1($tweet){
 		include_once "formatJapaneseDate.php";
 		$header = headerFormat($tweet);
@@ -15,7 +13,7 @@ error_reporting(0);
 		return $formatted;
 	}
  
-	function formatTweet_b2($tweet, $text){
+	function formatTweet_b2($tweet){
 		$formatted = formatWithImage_retweet($tweet);
 		$footer = formatFooter($tweet);
 		$formatted .= '<section class="twitter_img_01">';
@@ -42,9 +40,9 @@ error_reporting(0);
 		}
 	}
 
-	function formatTweet_b3($tweet, $text){
+	function formatTweet_b3($tweet){
 		$footer = formatFooter($tweet);
-		$formatted = formatWithImage_retweet($tweet, $text).'<section class="twitter_img_02">
+		$formatted = formatWithImage_retweet($tweet).'<section class="twitter_img_02">
 								<div class="left">';
 
 		for($i=0;$i<1;$i++){
@@ -82,9 +80,9 @@ error_reporting(0);
 		return $formatted;
 	}
 
-	function formatTweet_b4($tweet, $text){
+	function formatTweet_b4($tweet){
 		$footer = formatFooter($tweet);
-		$formatted = formatWithImage_retweet($tweet, $text) . '<section class="twitter_img_03">';
+		$formatted = formatWithImage_retweet($tweet) . '<section class="twitter_img_03">';
 		for($i=0;$i<1;$i++){
 			$twitter_img = $tweet->extended_entities->media[$i]->media_url;
 			if($twitter_img != ''){
@@ -118,9 +116,10 @@ error_reporting(0);
 		return $formatted;
 	}
 
-	function formatTweet_b5($tweet, $text){
+	function formatTweet_b5($tweet){
+		$text = $tweet->retweeted_status->full_text;
+		$formatted = formatWithImage_retweet($tweet) . '<section class="twitter_img_04">';
 		$footer = formatFooter($tweet);
-		$formatted = formatWithImage_retweet($tweet, $text) . '<section class="twitter_img_04">';
 		
 		$formatted .= '<div class="left">';
 		for($i=0;$i<2;$i++){
@@ -151,10 +150,13 @@ error_reporting(0);
 		return $formatted;
 	}
 
-	function formatTweet_b6($tweet, $text){
-		$header = headerFormat($tweet);
+	function formatTweet_b6($tweet){
+		include_once "formatJapaneseDate.php";
+		
 		$headerRetweet = headerFormat_retweet($tweet);
 		$footer = formatFooter($tweet);
+		$header = headerFormat($tweet);
+		$text = $tweet->retweeted_status->full_text;
 
 		$videoUrl = $tweet->extended_entities->media[0]->expanded_url;
 		$displayUrl = $tweet->extended_entities->media[0]->display_url;
@@ -163,9 +165,12 @@ error_reporting(0);
 		$formatted = $header . $headerRetweet . nl2br($text) . '<div class="twitter_movie">
 			<a href="'.$videoUrl.'" target="_blank">'.$displayUrl.'</a>
 			<img src="'.$twitter_img.'">'.$footer.'</div></div>';
+		return $formatted;
 	}
 
-	function formatTweet_b7($tweet, $text){
+	function formatTweet_b7($tweet){
+		include_once "formatJapaneseDate.php";
+		$text = $tweet->retweeted_status->full_text;
 		$header = headerFormat($tweet);
 		$headerRetweet = headerFormat_retweet($tweet);
 		$footer = formatFooter($tweet);

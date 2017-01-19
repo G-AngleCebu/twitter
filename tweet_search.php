@@ -181,45 +181,45 @@ foreach ($results as $result) {
 			case 'C13':
 				echo formatTweet_c13($result);				
 				break;	
-			// case 'D1':
-			// 	echo formatTweet_d1($result, $fulltext);				
-			// 	break;
-			// case 'D2':
-			// 	echo formatTweet_d2($result, $fulltext);				
-			// 	break;
-			// case 'D3':
-			// 	echo formatTweet_d3($result, $fulltext);				
-			// 	break;
-			// case 'D4':
-			// 	echo formatTweet_d4($result, $fulltext);				
-			// 	break;
-			// case 'D5':
-			// 	echo formatTweet_d5($result, $fulltext);				
-			// 	break;
-			// case 'D6':
-			// 	echo formatTweet_d6($result, $fulltext);				
-			// 	break;
-			// case 'D7':
-			// 	echo formatTweet_d7($result, $fulltext);				
-			// 	break;
-			// case 'D8':
-			// 	echo formatTweet_d8($result);				
-			// 	break;
-			// case 'D9':
-			// 	echo formatTweet_d9($result);				
-			// 	break;
-			// case 'D10':
-			// 	echo formatTweet_d10($result);				
-			// 	break;
-			// case 'D11':
-			// 	echo formatTweet_d11($result);				
-			// 	break;
-			// case 'D12':
-			// 	echo formatTweet_d12($result);				
-			// 	break;
-			// case 'D13':
-			// 	echo formatTweet_d13($result, $fulltext);				
-			// 	break;
+			case 'D1':
+				echo formatTweet_d1($result);				
+				break;
+			case 'D2':
+				echo formatTweet_d2($result, $fulltext);				
+				break;
+			case 'D3':
+				echo formatTweet_d3($result, $fulltext);				
+				break;
+			case 'D4':
+				echo formatTweet_d4($result, $fulltext);				
+				break;
+			case 'D5':
+				echo formatTweet_d5($result, $fulltext);				
+				break;
+			case 'D6':
+				echo formatTweet_d6($result, $fulltext);				
+				break;
+			case 'D7':
+				echo formatTweet_d7($result, $fulltext);				
+				break;
+			case 'D8':
+				echo formatTweet_d8($result);				
+				break;
+			case 'D9':
+				echo formatTweet_d9($result);				
+				break;
+			case 'D10':
+				echo formatTweet_d10($result);				
+				break;
+			case 'D11':
+				echo formatTweet_d11($result);				
+				break;
+			case 'D12':
+				echo formatTweet_d12($result);				
+				break;
+			case 'D13':
+				echo formatTweet_d13($result, $fulltext);				
+				break;
 
 			default:
 				// echo $fulltext."<br><br>";

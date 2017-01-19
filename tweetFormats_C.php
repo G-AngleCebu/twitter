@@ -171,8 +171,8 @@
 		$text = quotedExpandUrl($tweet);
 		$header = headerFormat($tweet) . headerFormat_retweetWithComment($tweet);
 		$footer = formatFooter($tweet);
-		$text = reverseEngineer(breakYoutube($tweet));
-		$formatted = $header . '<p class="retweet_txt>'.nl2br($text).'</p>'.$footer;
+		$youtubeUrl = $tweet->quoted_status->entities->urls[0]->expanded_url;
+		$formatted = $header . $youtubeUrl . $footer;
 
 		return $formatted;
 	}

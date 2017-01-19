@@ -2,10 +2,7 @@
 require_once 'twitteroauth.php';
 date_default_timezone_set("Asia/Tokyo");
 
-define('CONSUMER_KEY', 'qfo8TJlLKD49hdJXqrV7yKPTU');
-define('CONSUMER_SECRET', 'd4dm11GrAO7DVOD7afpQmJrtsR1At5stK0qDmtCRkJflRorhat');
-define('ACCESS_TOKEN', '168614971-pmsnz4mKwpEl9qQ6mlf4fsNs4VOF1HOIxnssukt4');
-define('ACCESS_TOKEN_SECRET', 'k7f1PL8UabqDU7T5prddvTqFg0HWbtGejNVHKtjTjvHEP');
+include_once 'api_keys.php';
 
 function search(array $query){
 	$toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
@@ -41,11 +38,16 @@ include_once "tweetFormats_D.php";
 include_once "tweetFormats_B.php";
 /*eunicecode*/
 
-$query = array("tweet_mode" => extended,"screen_name" => "algeki_info", "count" => 100);
+// $query = array("tweet_mode" => extended,"screen_name" => "algeki_info", "count" => 100);
+$query = array("tweet_mode" => extended,"screen_name" => "gec_dev", "count" => 100);
+
 $results = search($query);
 $tweetCt = count($results);
 
 $today = strtotime(date('Y/m/d H:i'));
+
+// for testing
+// echo json_encode($results);exit;
 
 foreach ($results as $result) {
 	$tweetDate = $today - strtotime(formatTwitterDate($result->created_at));
@@ -57,6 +59,8 @@ foreach ($results as $result) {
 		$fulltext2 = extendedEntityExpandUrl($result, $fulltext1);
 		$fulltext3 = retweetedExpandUrl($result, $fulltext2);
 		$fulltext = mediaUrls($result, $fulltext3);
+
+		echo "<h1>{$tweet_type} {$tweetFormat} / id: {$result->id} </h1>";
 
 		switch ($tweetFormat) {
 			case 'A1':
@@ -99,19 +103,19 @@ foreach ($results as $result) {
 				echo formatTweet_a13($result, $fulltext);
 				break;
 			case 'B1':
-				echo formatTweet_b1($result);
+				// echo formatTweet_b1($result);
 				break;
 			case 'B2':
-				echo formatTweet_b2($result);
+				// echo formatTweet_b2($result);
 				break;
 			case 'B3':
-				echo formatTweet_b3($result);
+				// echo formatTweet_b3($result);
 				break;
 			case 'B4':
-				echo formatTweet_b4($result);
+				// echo formatTweet_b4($result);
 				break;
 			case 'B5':
-				echo formatTweet_b5($result);
+				// echo formatTweet_b5($result);
 				break;
 			case 'B6':
 				echo formatTweet_b6($result);
@@ -138,7 +142,6 @@ foreach ($results as $result) {
 				echo formatTweet_b13($result);
 				break;
 			case 'C1':
-
 				echo formatTweet_c1($result);
 				break;
 			case 'C2':
@@ -177,45 +180,45 @@ foreach ($results as $result) {
 			case 'C13':
 				echo formatTweet_c13($result);				
 				break;	
-			case 'D1':
-				echo formatTweet_d1($result, $fulltext);				
-				break;
-			case 'D2':
-				echo formatTweet_d2($result, $fulltext);				
-				break;
-			case 'D3':
-				echo formatTweet_d3($result, $fulltext);				
-				break;
-			case 'D4':
-				echo formatTweet_d4($result, $fulltext);				
-				break;
-			case 'D5':
-				echo formatTweet_d5($result, $fulltext);				
-				break;
-			case 'D6':
-				echo formatTweet_d6($result, $fulltext);				
-				break;
-			case 'D7':
-				echo formatTweet_d7($result, $fulltext);				
-				break;
-			case 'D8':
-				echo formatTweet_d8($result);				
-				break;
-			case 'D9':
-				echo formatTweet_d9($result);				
-				break;
-			case 'D10':
-				echo formatTweet_d10($result);				
-				break;
-			case 'D11':
-				echo formatTweet_d11($result);				
-				break;
-			case 'D12':
-				echo formatTweet_d12($result);				
-				break;
-			case 'D13':
-				echo formatTweet_d13($result, $fulltext);				
-				break;
+			// case 'D1':
+			// 	echo formatTweet_d1($result, $fulltext);				
+			// 	break;
+			// case 'D2':
+			// 	echo formatTweet_d2($result, $fulltext);				
+			// 	break;
+			// case 'D3':
+			// 	echo formatTweet_d3($result, $fulltext);				
+			// 	break;
+			// case 'D4':
+			// 	echo formatTweet_d4($result, $fulltext);				
+			// 	break;
+			// case 'D5':
+			// 	echo formatTweet_d5($result, $fulltext);				
+			// 	break;
+			// case 'D6':
+			// 	echo formatTweet_d6($result, $fulltext);				
+			// 	break;
+			// case 'D7':
+			// 	echo formatTweet_d7($result, $fulltext);				
+			// 	break;
+			// case 'D8':
+			// 	echo formatTweet_d8($result);				
+			// 	break;
+			// case 'D9':
+			// 	echo formatTweet_d9($result);				
+			// 	break;
+			// case 'D10':
+			// 	echo formatTweet_d10($result);				
+			// 	break;
+			// case 'D11':
+			// 	echo formatTweet_d11($result);				
+			// 	break;
+			// case 'D12':
+			// 	echo formatTweet_d12($result);				
+			// 	break;
+			// case 'D13':
+			// 	echo formatTweet_d13($result, $fulltext);				
+			// 	break;
 
 			default:
 				// echo $fulltext."<br><br>";

@@ -1,7 +1,5 @@
 <?php 
 
-error_reporting(0); 
-	
 	function formatTweet_b1($tweet){
 		include_once "formatJapaneseDate.php";
 		$header = headerFormat($tweet);

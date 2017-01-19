@@ -26,6 +26,7 @@
 		$prof_img_url = $tweet->user->profile_image_url;
 		$screen_name = $tweet->user->screen_name; //@algeki_info
 		$user_name = $tweet->user->name; //劇団アルタイル公式
+		$tweet_id = $tweet->id;
 
 		$header = '<p class="post_story-icon">
 					<a href="https://twitter.com/algeki_info?lang=ja" target="_blank">
@@ -34,8 +35,8 @@
 					</p>
 					<div class="article_story">
 					<h2>
-					<a href="https://twitter.com/algeki_info?lang=ja" target="_blank">'.$user_name.' '.$screen_name.'</a><!--User Name-->
-					<span class="story_date"><a href="https://twitter.com/algeki_info/status/803493621479542784" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
+					<a href="https://twitter.com/'. $screen_name .'?lang=ja" target="_blank">'.$user_name.' '.$screen_name.'</a><!--User Name-->
+					<span class="story_date"><a href="https://twitter.com/'.$screen_name.'/status/'.$tweet_id.'" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
 					</h2>
 					<p class="story_cat">★アル劇</p><!--keyword-->';
 
@@ -95,19 +96,20 @@
 		$prof_img_url = $tweet->user->profile_image_url;
 		$screen_name = $tweet->user->screen_name; //@algeki_info
 		$user_name = $tweet->user->name; //劇団アルタイル公式
+		$tweet_id = $tweet->id;
 
 		$header = '<p class="post_story-icon">
-					<a href="https://twitter.com/algeki_info?lang=ja" target="_blank">
+					<a href="https://twitter.com/'.$screen_name.'?lang=ja" target="_blank">
 					<img src="'.$prof_img_url.'" alt="alive-test" width="65" height="65" /><!--icon-->
 					</a>
 					</p>
 					<div class="article_story">
 					<h2>
-					<a href="https://twitter.com/algeki_info?lang=ja" target="_blank">'.$user_name.' '.$screen_name.'</a><!--User Name-->
-					<span class="story_date"><a href="https://twitter.com/algeki_info/status/803493621479542784" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
+					<a href="https://twitter.com/'.$screen_name.'?lang=ja" target="_blank">'.$user_name.' '.$screen_name.'</a><!--User Name-->
+					<span class="story_date"><a href="https://twitter.com/'.$screen_name.'/status/'.$tweet_id.'" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
 					</h2>
 
-					<a href="https://twitter.com/algeki_info" class="tweet-reply">'.$screen_name.'</a>';
+					<a href="https://twitter.com/'.$screen_name.'" class="tweet-reply">'.$screen_name.'</a>';
 
 		return $header;
 	}

@@ -60,7 +60,7 @@
 		$formatted = formatWithImage_C($tweet, $text) . '<section class="twitter_img_02">';
 		$footer = formatFooter($tweet);
 		for($i=0;$i<1;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -71,7 +71,7 @@
 			}
 		}
 		for($i=1;$i<2;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -91,7 +91,7 @@
 		$formatted = formatWithImage_C($tweet, $text) . '<section class="twitter_img_03">';
 		$footer = formatFooter($tweet);
 		for($i=0;$i<1;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -104,7 +104,7 @@
 
 		$formatted .= '<div class="right">';
 		for($i=1;$i<3;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -121,11 +121,11 @@
 
 	function formatTweet_c5($tweet){
 		include_once "formatJapaneseDate.php";
-		$formatted = formatWithImage_C($tweet, $text) . '<section class="twitter_img_04"><div class="left"';
+		$formatted = formatWithImage_C($tweet, $text) . '<section class="twitter_img_04">';
 		$footer = formatFooter($tweet);
 		$formatted .= '<div class="left">';
 		for($i=0;$i<2;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -137,7 +137,7 @@
 		}
 		$formatted .= '</div><div class="right">';
 		for($i=2;$i<4;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -155,9 +155,9 @@
 	function formatTweet_c6($tweet){
 		$header = headerFormat($tweet) . headerFormat_retweetWithComment($tweet);
 		$footer = formatFooter($tweet);
-		$videoUrl = $tweet->extended_entities->media[0]->expanded_url;
-		$displayUrl = $tweet->extended_entities->media[0]->display_url;
-		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
+		$videoUrl = $tweet->quoted_status->extended_entities->media[0]->expanded_url;
+		$displayUrl = $tweet->quoted_status->extended_entities->media[0]->display_url;
+		$mediaUrl = $tweet->quoted_status->extended_entities->media[0]->media_url;
 
 		$formatted = $header . '<p class="retweet_txt">'
 					.nl2br($text).'</p><div class="twitter_movie"><a href="'.$videoUrl.'" target="_blank">'.$displayUrl.'</a><img src="'.$mediaUrl.'"></div>'.$footer;
@@ -166,6 +166,7 @@
 	}
 
 	function formatTweet_c7($tweet){
+		include_once "formatJapaneseDate.php";
 		
 		$text = quotedExpandUrl($tweet);
 		$header = headerFormat($tweet) . headerFormat_retweetWithComment($tweet);
@@ -179,7 +180,7 @@
 	function formatTweet_c8($tweet){
 		$formatted = $formatImageOnly_C($tweet) . '<section class="twitter_img_01">';
 		$footer = formatFooter($tweet);
-		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
+		$mediaUrl = $tweet->quoted_status->extended_entities->media[0]->media_url;
 		if($mediaUrl != ''){
 			$content = file_get_contents($mediaUrl);
 			$file_name = randomStringGenerator();
@@ -195,7 +196,7 @@
 	function formatTweet_c9($tweet){
 		$formatted = $formatImageOnly_C($tweet) . '<section class="twitter_img_02">';
 		$footer = formatFooter($tweet);
-		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
+		$mediaUrl = $tweet->quoted_status->extended_entities->media[0]->media_url;
 		if($mediaUrl != ''){
 			$content = file_get_contents($mediaUrl);
 			$file_name = randomStringGenerator();
@@ -206,7 +207,7 @@
 		}
 		$formatted .= '<div class="right">';
 		for($i=1;$i<2;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -225,7 +226,7 @@
 		$formatted = $formatImageOnly_C($tweet).'<section class="twitter_img_03">';
 		$footer = formatFooter($tweet);
 
-		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
+		$mediaUrl = $tweet->quoted_status->extended_entities->media[0]->media_url;
 		if($mediaUrl != ''){
 			$content = file_get_contents($mediaUrl);
 			$file_name = randomStringGenerator();
@@ -236,7 +237,7 @@
 		}
 		$formatted .= '<div class="right">';
 		for($i=1;$i<3;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -257,7 +258,7 @@
 
 		$formatted .= '<div class="left">';
 		for($i=0;$i<2;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -269,7 +270,7 @@
 		}
 		$formatted .= '</div><div class="right">';
 		for($i=2;$i<4;$i++){
-			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
+			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
 			if($mediaUrl != ''){
 				$content = file_get_contents($mediaUrl);
 				$file_name = randomStringGenerator();
@@ -287,9 +288,9 @@
 	function formatTweet_c12($tweet){
 		$header = headerFormat($tweet) . headerFormat_retweetWithComment($tweet);
 		$footer = formatFooter($tweet);
-		$videoUrl = $tweet->extended_entities->media[0]->expanded_url;
-		$displayUrl = $tweet->extended_entities->media[0]->display_url;
-		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
+		$videoUrl = $tweet->quoted_status->extended_entities->media[0]->expanded_url;
+		$displayUrl = $tweet->quoted_status->extended_entities->media[0]->display_url;
+		$mediaUrl = $tweet->quoted_status->extended_entities->media[0]->media_url;
 	
 		$formatted = $header . '<p class="retweet_txt">'
 					.$text.'</p><div class="twitter_movie"><a href="'.$videoUrl.'" target="_blank">'.$displayUrl.'</a><img src="'.$mediaUrl.'"></div>'.$footer;

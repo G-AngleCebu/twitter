@@ -1,7 +1,6 @@
 <?php 
 
 	function formatWithImage_D($tweet, $text){
-
 		include_once "formatJapaneseDate.php";
 		$header = headerFormat_reply($tweet);
 		$text = reverseEngineer(expandResult($tweet));
@@ -17,15 +16,15 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d1($tweet, $text) {
+	function formatTweet_d1($tweet, $text) {
 		$text = reverseEngineer(expandResult($tweet));
-
+		
 		$header = headerFormat_reply($tweet);
 		$formatted = $header . nl2br($text)."</div>";
 		return $formatted;
 	}
 
-	function tweetFormat_d2($tweet, $text){
+	function formatTweet_d2($tweet, $text){
 		$formatted = formatWithImage_D($tweet, $text).'<section class="twitter_img_01">';
 		$mediaUrl = $tweet->retweeted_status->extended_entitites->media[0]->media_url;
 		if($mediaUrl != ''){
@@ -51,7 +50,7 @@
 
 	}
 
-	function tweetFormat_d3($tweet, $text){
+	function formatTweet_d3($tweet, $text){
 		$formatted = formatWithImage_D($tweet, $text) . '<section class="twitter_img_02">';
 		for($i=0;$i<1;$i++){
 			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
@@ -80,7 +79,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d4($tweet, $text){
+	function formatTweet_d4($tweet, $text){
 		$formatted = formatWithImage_D($tweet, $text).'<section class="twitter_img_03">';
 		for($i=0;$i<1;$i++){
 			$mediaUrl = $tweet->extended_entities->media[$i]->media_url;
@@ -110,7 +109,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d5($tweet, $text){
+	function formatTweet_d5($tweet, $text){
 		$formatted = formatWithImage_D($tweet, $text).'<section class="twitter_img_04">';
 		$formatted .= '<div class="left">';
 		for($i=0;$i<2;$i++){
@@ -141,7 +140,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d6($tweet, $text) {
+	function formatTweet_d6($tweet, $text) {
 		$header = headerFormat_reply($tweet);
 		$videoUrl = $tweet->extended_entities->media[0]->expanded_url;
 		$displayUrl = $tweet->extended_entities->media[0]->display_url;
@@ -153,7 +152,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d7($tweet, $text){
+	function formatTweet_d7($tweet, $text){
 		$header = headerFormat($tweet);
 		$text = reverseEngineer(breakYoutube($tweet));
 
@@ -162,7 +161,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d8($tweet){
+	function formatTweet_d8($tweet){
 		$formatted = formatImageOnly_D($tweet).'<section class="twitter_img_01">';
 		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
 		if($mediaUrl != ''){
@@ -177,7 +176,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d9($tweet){
+	function formatTweet_d9($tweet){
 		$formatted = formatImageOnly_D($tweet).'<section class="twitter_img_02">';
 		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
 		if($mediaUrl != ''){
@@ -205,7 +204,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d10($tweet){
+	function formatTweet_d10($tweet){
 		$formatted = formatImageOnly_D($tweet).'<section class="twitter_img_03">';
 		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
 		if($mediaUrl != ''){
@@ -233,7 +232,7 @@
 		return $formatted;	
 	}
 
-	function tweetFormat_d11($tweet){
+	function formatTweet_d11($tweet){
 		$formatted = formatImageOnly_D($tweet).'<section class="twitter_img_04">';
 		$formatted .= '<div class="left">';
 		for($i=0;$i<2;$i++){
@@ -264,7 +263,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d12($tweet){
+	function formatTweet_d12($tweet){
 		$header = headerFormat_reply($tweet);
 		$videoUrl = $tweet->extended_entities->media[0]->expanded_url;
 		$displayUrl = $tweet->extended_entities->media[0]->display_url;
@@ -275,7 +274,7 @@
 		return $formatted;
 	}
 
-	function tweetFormat_d13($tweet){
+	function formatTweet_d13($tweet){
 		$header = headerFormat($tweet);
 		$text = reverseEngineer(breakYoutube($tweet));
 

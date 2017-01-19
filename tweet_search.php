@@ -110,13 +110,13 @@ foreach ($results as $result) {
 				echo formatTweet_b2($result);
 				break;
 			case 'B3':
-				echo formatTweet_b3($result);
+				// echo formatTweet_b3($result);
 				break;
 			case 'B4':
-				echo formatTweet_b4($result);
+				// echo formatTweet_b4($result);
 				break;
 			case 'B5':
-				echo formatTweet_b5($result);
+				// echo formatTweet_b5($result);
 				break;
 			case 'B6':
 				echo formatTweet_b6($result);

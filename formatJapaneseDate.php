@@ -80,8 +80,10 @@
 		$retweet_urls = "https://".$tweet->quoted_status->entities->media[0]->display_url;
 		$retweet_user = $tweet->quoted_status->user->name;
 		$retweet_date = formatRetweetTime($tweet->quoted_status->created_at);
+		$retweet_quoted_text = $tweet->full_text;
 
-		$headerB = '引用リツイートテキスト<div class="retweet_article">
+		$headerB = $retweet_quoted_text;
+		$headerB .= '<div class="retweet_article">
 						<p class="retweet_icon">
 							<a href="https://twitter.com/animegame_kt" target="_blank">
 								<img src="'.$retweet_imgsrc.'" width="65" height="65" />

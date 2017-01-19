@@ -50,6 +50,10 @@ function checkTweetFormat($type, $tweet){
 	elseif((isset($tweet->full_text)) && (count($extended_entities->media) > 0)): //text with media
 		$imagesCt = 0;
 		$videoCt = 0;
+		// echo $imagesCt . ' ' . $videoCt . '...';
+		// echo '<hr/>';
+		// echo json_encode($extended_entities->media);
+		// echo '<hr/>';
 		for($i=0; $i<count($extended_entities->media); $i++){
 			if($extended_entities->media[$i]->type == 'photo'):
 				$imagesCt++;
@@ -57,6 +61,7 @@ function checkTweetFormat($type, $tweet){
 				$videoCt++;
 			endif;
 		}
+		// echo $imagesCt . ' ' . $videoCt;
 		if($imagesCt == 1 && $videoCt == 0):
 			return $letter.'2';
 		elseif($imagesCt == 2 && $videoCt == 0):
@@ -65,7 +70,7 @@ function checkTweetFormat($type, $tweet){
 			return $letter.'4';
 		elseif($imagesCt == 4 && $videoCt == 0):
 			return $letter.'5';
-		elseif($videoCt == 1 && $videoCt == 0):
+		elseif($imagesCt == 0 && $videoCt == 1):
 			return $letter.'6';
 		endif;
 	elseif(!(isset($tweet->full_text)) && (count($extended_entities->media) > 0)): //media only

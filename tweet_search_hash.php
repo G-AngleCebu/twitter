@@ -86,9 +86,6 @@ foreach ($results->statuses as $result) {
 		$fulltext3 = retweetedExpandUrl($result, $fulltext2);
 		$fulltext = mediaUrls($result, $fulltext3);
 
-		// for testing
-		// for testing
-
 		switch ($tweetFormat) {
 			case 'A1':
 				echo formatTweet_a1($result, $fulltext);

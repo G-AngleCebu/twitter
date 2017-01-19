@@ -35,7 +35,7 @@
 					</p>
 					<div class="article_story">
 					<h2>
-					<a href="https://twitter.com/'. $screen_name .'?lang=ja" target="_blank">'.$user_name.' '.$screen_name.'</a><!--User Name-->
+					<a href="https://twitter.com/'. $screen_name .'?lang=ja" target="_blank">'.$user_name.' @'.$screen_name.'</a><!--User Name-->
 					<span class="story_date"><a href="https://twitter.com/'.$screen_name.'/status/'.$tweet_id.'" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
 					</h2>
 					<p class="story_cat">★アル劇</p><!--keyword-->';
@@ -46,8 +46,8 @@
 	function formatFooter($tweet){
 		include_once "formatJapaneseDate.php";
 
-		$retweet_user = $tweet->retweeted_status->user->name;
-		$retweet_date =  formatRetweetTime($tweet->retweeted_status->created_at);
+		$retweet_user = $tweet->user->name;
+		$retweet_date = formatRetweetTime($tweet->created_at);
 
 		$footer = '<p class="retweet_user">retweeted by '.$retweet_user.'</p>
 								<p class="retweet_time">retweeted at '.$retweet_date.'</p>

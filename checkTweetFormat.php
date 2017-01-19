@@ -50,19 +50,13 @@ function checkTweetFormat($type, $tweet){
 	elseif((isset($tweet->full_text)) && (count($extended_entities->media) > 0)): //text with media
 		$imagesCt = 0;
 		$videoCt = 0;
-		echo $imagesCt . ' ' . $videoCt . '...';
-		echo '<hr/>';
-		echo json_encode($extended_entities->media);
-		echo '<hr/>';
 		for($i=0; $i<count($extended_entities->media); $i++){
-			echo $extended_entities->media[$i]->type;
 			if($extended_entities->media[$i]->type == 'photo'):
 				$imagesCt++;
 			elseif($extended_entities->media[$i]->type == 'video'):
 				$videoCt++;
 			endif;
 		}
-		echo $imagesCt . ' ' . $videoCt;
 		if($imagesCt == 1 && $videoCt == 0):
 			return $letter.'2';
 		elseif($imagesCt == 2 && $videoCt == 0):

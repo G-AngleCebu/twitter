@@ -60,7 +60,7 @@ foreach ($results as $result) {
 		$fulltext3 = retweetedExpandUrl($result, $fulltext2);
 		$fulltext = mediaUrls($result, $fulltext3);
 
-		echo "<h1>{$tweet_type} {$tweetFormat} / id: {$result->id} </h1>";
+		// echo "<h1>{$tweet_type} {$tweetFormat} / id: {$result->id} </h1>";
 
 		switch ($tweetFormat) {
 			case 'A1':

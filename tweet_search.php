@@ -60,8 +60,7 @@ foreach ($results as $result) {
 		$fulltext3 = retweetedExpandUrl($result, $fulltext2);
 		$fulltext = mediaUrls($result, $fulltext3);
 
-		echo "<h1>{$tweet_type} : {$tweetFormat} / id: {$result->id} </h1>";
-		// echo json_encode($result);
+		// echo "<h1>{$tweet_type} : {$tweetFormat} / id: {$result->id} </h1>";
 
 		switch ($tweetFormat) {
 			case 'A1':
@@ -110,13 +109,13 @@ foreach ($results as $result) {
 				echo formatTweet_b2($result);
 				break;
 			case 'B3':
-				// echo formatTweet_b3($result);
+				echo formatTweet_b3($result);
 				break;
 			case 'B4':
-				// echo formatTweet_b4($result);
+				echo formatTweet_b4($result);
 				break;
 			case 'B5':
-				// echo formatTweet_b5($result);
+				echo formatTweet_b5($result);
 				break;
 			case 'B6':
 				echo formatTweet_b6($result);

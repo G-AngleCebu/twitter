@@ -63,6 +63,7 @@
 		$post_date = formatDate($tweet->created_at);
 		$prof_img_url = $tweet->user->profile_image_url;
 		$screen_name = $tweet->user->screen_name; //@algeki_info
+		$reply_to_screen_name = $tweet->in_reply_to_screen_name;
 		$user_name = $tweet->user->name; //劇団アルタイル公式
 		$tweet_id = $tweet->id;
 
@@ -77,7 +78,7 @@
 					<span class="story_date"><a href="https://twitter.com/'.$screen_name.'/status/'.$tweet_id.'" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
 					</h2>
 
-					<a href="https://twitter.com/'.$screen_name.'" class="tweet-reply">@'.$screen_name.'</a> ';
+					<a href="https://twitter.com/'.$reply_to_screen_name.'" class="tweet-reply">@'.$reply_to_screen_name.'</a> ';
 
 		return $header;
 	}

@@ -3,13 +3,13 @@ require_once 'twitteroauth.php';
 date_default_timezone_set("Asia/Tokyo");
 
 include_once 'api_keys.php';
+
 $toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
 
 function search(array $query){
 	global $toa;
 	return $toa->get('statuses/user_timeline', $query);
 }
-
 	
 /*eunicecode*/
 
@@ -39,7 +39,7 @@ include_once "tweetFormats_D.php";
 include_once "tweetFormats_B.php";
 /*eunicecode*/
 
-// $query = array("tweet_mode" => extended,"screen_name" => "algeki_info", "count" => 100);
+// $query = array("tweet_mode" => "extended", "screen_name" => "algeki_info", "count" => 100);
 $query = array("tweet_mode" => "extended","username" => "gec_dev", "screen_name" => "gec_dev", "count" => 100);
 
 $results = search($query);
@@ -74,8 +74,7 @@ foreach ($results as $result) {
 		$fulltext = mediaUrls($result, $fulltext3);
 
 		// for testing
-		echo "<hr/>";
-		echo "<h1>{$tweet_type} : {$tweetFormat} / id: {$result->id} </h1>";
+		echo "<hr/><h1>{$tweet_type} : {$tweetFormat} / id: {$result->id} </h1>";
 		// for testing
 
 		switch ($tweetFormat) {

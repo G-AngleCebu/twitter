@@ -1,29 +1,16 @@
 <?php
 require_once 'twitteroauth.php';
-
 date_default_timezone_set("Asia/Tokyo");
 
-define('CONSUMER_KEY', 'qfo8TJlLKD49hdJXqrV7yKPTU');
-define('CONSUMER_SECRET', 'd4dm11GrAO7DVOD7afpQmJrtsR1At5stK0qDmtCRkJflRorhat');
-define('ACCESS_TOKEN', '168614971-pmsnz4mKwpEl9qQ6mlf4fsNs4VOF1HOIxnssukt4');
-define('ACCESS_TOKEN_SECRET', 'k7f1PL8UabqDU7T5prddvTqFg0HWbtGejNVHKtjTjvHEP');
+include_once 'api_keys.php';
 
 $search_keywords = array('アル劇★','test');
-// $search_keywords = array('こんにちは','テスト');
-// $search_keywords = array("#mobile", "#app");
+
+$toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
 
 function search(array $query){
-	
-	$toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
-
+	global $toa;
 	return $toa->get('search/tweets', $query);
-
-	// $array_1 = (array) $toa->get('search/tweets', ["q"=>$query[0]]);
-	// $array_2 = (array) $toa->get('search/tweets', ["q"=>$query[1]]);
-	// return (object) array_merge($array_1, $array_2);
-
-	// return (object) array_merge((array) $array_1, (array) $array_2);
-	// return $toa->get('search/tweets', ["q"=>'劇団アルタイル']);
 }
 
 	
@@ -56,7 +43,7 @@ include_once "tweetFormats_B.php";
 /*eunicecode*/
 
 $query = array(
-	// "tweet_mode" => "extended",
+	"tweet_mode" => "extended",
 	"screen_name" => "algeki_info",
 	"count" => 100,
 	"q" => implode(" OR ", $search_keywords)
@@ -66,20 +53,22 @@ $results = search($query);
 $tweetCt = count($results);
 $today = strtotime(date('Y/m/d H:i'));
 
-// echo json_encode($results);exit;
-
-// foreach($results->statuses as $result){
-// 	echo checkTweetType($result)."<br>";
-// 	echo $result->full_text."<br>";
-// 	echo $result->text."<br><br>";
-// }
-// exit;
-
 foreach ($results->statuses as $result) {
 	$tweetDate = $today - strtotime(formatTwitterDate($result->created_at));
 	if($tweetDate <= 691200){ 
 
 		$tweet_type = checkTweetType($result);
+
+		// if tweet is a reply, attach the tweet being replied to
+		if($tweet_type == 'reply') {
+			$in_reply_to_tweet = $toa->get('statuses/show/' . $result->in_reply_to_status_id_str);
+
+			// check if there are no errors (e.g. the orig tweet was deleted)
+			if(!isset($in_reply_to_tweet->errors)) {
+				$result->in_reply_to_tweet = $in_reply_to_tweet;
+			}
+		}
+
 		$tweetFormat = checkTweetFormat($tweet_type, $result);
 		$fulltext1 = expandResult($result);
 		$fulltext2 = extendedEntityExpandUrl($result, $fulltext1);
@@ -87,8 +76,8 @@ foreach ($results->statuses as $result) {
 		$fulltext = mediaUrls($result, $fulltext3);
 
 		// for testing
-		echo "<hr/>";
-		echo "<h1>{$result->id} {$tweet_type} / {$tweetFormat}</h1>";
+		// echo "<hr/>";
+		// echo "<h1>{$result->id} {$tweet_type} / {$tweetFormat}</h1>";
 		// for testing
 
 		switch ($tweetFormat) {

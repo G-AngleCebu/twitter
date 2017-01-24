@@ -1,13 +1,15 @@
 <?php
 
-// algeki_info
+// @algeki_info:
 
 // define('CONSUMER_KEY', 'qfo8TJlLKD49hdJXqrV7yKPTU');
 // define('CONSUMER_SECRET', 'd4dm11GrAO7DVOD7afpQmJrtsR1At5stK0qDmtCRkJflRorhat');
 // define('ACCESS_TOKEN', '168614971-pmsnz4mKwpEl9qQ6mlf4fsNs4VOF1HOIxnssukt4');
 // define('ACCESS_TOKEN_SECRET', 'k7f1PL8UabqDU7T5prddvTqFg0HWbtGejNVHKtjTjvHEP');
 
-// @gec_dev
+
+
+// @gec_dev:
 
 define('CONSUMER_KEY', 'Cn7J1PTE0ZWXCqFd9Zjy7B4xA');
 define('CONSUMER_SECRET', 'zphxi5c2wLdzNxfpJHu9taznPDlLMkfxmLUHbQu9WPGPxeVZz1');

@@ -1,4 +1,4 @@
-<?php 
+<?php 	
 	date_default_timezone_set('Asia/Tokyo');
 
 	function formatDate($date){
@@ -21,28 +21,6 @@
 		return $randomString;
 	}
 
-	function headerFormat($tweet){
-		$post_date = formatDate($tweet->created_at);
-		$prof_img_url = $tweet->user->profile_image_url;
-		$screen_name = $tweet->user->screen_name; //@algeki_info
-		$user_name = $tweet->user->name; //劇団アルタイル公式
-		$tweet_id = $tweet->id;
-
-		$header = '<p class="post_story-icon">
-					<a href="https://twitter.com/algeki_info?lang=ja" target="_blank">
-					<img src="'.$prof_img_url.'" alt="alive-test" width="65" height="65" /><!--icon-->
-					</a>
-					</p>
-					<div class="article_story">
-					<h2>
-					<a href="https://twitter.com/'. $screen_name .'?lang=ja" target="_blank">'.$user_name.' @'.$screen_name.'</a><!--User Name-->
-					<span class="story_date"><a href="https://twitter.com/'.$screen_name.'/status/'.$tweet_id.'" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
-					</h2>
-					<p class="story_cat">★アル劇</p><!--keyword-->';
-
-		return $header;
-	}
-
 	function formatFooter($tweet){
 		include_once "formatJapaneseDate.php";
 
@@ -59,38 +37,26 @@
 		return date('H:i:s', strtotime($date));
 	}
 
-	function headerFormat_retweet($tweet){ // FOR B
-		$retweet_imgsrc = $tweet->retweeted_status->user->profile_image_url;
-		$retweet_urls = "https://".$tweet->retweeted_status->entities->media[0]->display_url;
-		$retweet_user = $tweet->retweeted_status->user->name;
-		$retweet_date = formatRetweetTime($tweet->retweeted_status->created_at);
+	function headerFormat($tweet){
+		$post_date = formatDate($tweet->created_at);
+		$prof_img_url = $tweet->user->profile_image_url;
+		$screen_name = $tweet->user->screen_name; //@algeki_info
+		$user_name = $tweet->user->name; //劇団アルタイル公式
+		$tweet_id = $tweet->id;
 
-		$headerB = '<div class="retweet_article">
-						<p class="retweet_icon">
-							<a href="https://twitter.com/animegame_kt" target="_blank">
-								<img src="'.$retweet_imgsrc.'" width="65" height="65" />
-							</a>
-						</p>';
+		$header = '<p class="post_story-icon">
+					<a href="https://twitter.com/'.$screen_name.'?lang=ja" target="_blank">
+					<img src="'.$prof_img_url.'" alt="alive-test" width="65" height="65" /><!--icon-->
+					</a>
+					</p>
+					<div class="article_story">
+					<h2>
+					<a href="https://twitter.com/'. $screen_name .'?lang=ja" target="_blank">'.$user_name.' @'.$screen_name.'</a><!--User Name-->
+					<span class="story_date"><a href="https://twitter.com/'.$screen_name.'/status/'.$tweet_id.'" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
+					</h2>
+					<p class="story_cat">★アル劇</p><!--keyword-->';
 
-		return $headerB;
-	}
-
-	function headerFormat_retweetWithComment($tweet){ // FOR C
-		$retweet_imgsrc = $tweet->quoted_status->user->profile_image_url;
-		$retweet_urls = "https://".$tweet->quoted_status->entities->media[0]->display_url;
-		$retweet_user = $tweet->quoted_status->user->name;
-		$retweet_date = formatRetweetTime($tweet->quoted_status->created_at);
-		$retweet_quoted_text = $tweet->full_text;
-
-		$headerB = $retweet_quoted_text;
-		$headerB .= '<div class="retweet_article">
-						<p class="retweet_icon">
-							<a href="https://twitter.com/animegame_kt" target="_blank">
-								<img src="'.$retweet_imgsrc.'" width="65" height="65" />
-							</a>
-						</p>';
-		return $headerB;
-
+		return $header;
 	}
 
 	function headerFormat_reply($tweet){
@@ -107,13 +73,47 @@
 					</p>
 					<div class="article_story">
 					<h2>
-					<a href="https://twitter.com/'.$screen_name.'?lang=ja" target="_blank">'.$user_name.' '.$screen_name.'</a><!--User Name-->
+					<a href="https://twitter.com/'.$screen_name.'?lang=ja" target="_blank">'.$user_name.' @'.$screen_name.'</a><!--User Name-->
 					<span class="story_date"><a href="https://twitter.com/'.$screen_name.'/status/'.$tweet_id.'" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
 					</h2>
 
-					<a href="https://twitter.com/'.$screen_name.'" class="tweet-reply">'.$screen_name.'</a>';
+					<a href="https://twitter.com/'.$screen_name.'" class="tweet-reply">@'.$screen_name.'</a> ';
 
 		return $header;
+	}
+
+	function headerFormat_retweet($tweet){ // FOR B
+		$retweet_imgsrc = $tweet->retweeted_status->user->profile_image_url;
+		// $retweet_urls = "https://".$tweet->retweeted_status->entities->media[0]->display_url;
+		$retweet_user = $tweet->retweeted_status->user->screen_name;
+		$retweet_date = formatRetweetTime($tweet->retweeted_status->created_at);
+
+		$headerB = '<div class="retweet_article">
+						<p class="retweet_icon">
+							<a href="https://twitter.com/'.$retweet_user.'" target="_blank">
+								<img src="'.$retweet_imgsrc.'" width="65" height="65" />
+							</a>
+						</p>';
+
+		return $headerB;
+	}
+
+	function headerFormat_retweetWithComment($tweet){ // FOR C
+		$retweet_imgsrc = $tweet->quoted_status->user->profile_image_url;
+		// $retweet_urls = "https://".$tweet->quoted_status->entities->media[0]->display_url;
+		$retweet_user = $tweet->quoted_status->user->screen_name;
+		$retweet_date = formatRetweetTime($tweet->quoted_status->created_at);
+		$retweet_quoted_text = $tweet->full_text;
+
+		$headerB = $retweet_quoted_text;
+		$headerB .= '<div class="retweet_article">
+						<p class="retweet_icon">
+							<a href="https://twitter.com/'.$retweet_user.'" target="_blank">
+								<img src="'.$retweet_imgsrc.'" width="65" height="65" />
+							</a>
+						</p>';
+		return $headerB;
+
 	}
 
 

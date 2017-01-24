@@ -49,7 +49,7 @@ include_once "tweetFormats_B.php";
 /*eunicecode*/
 
 $query = array(
-	"tweet_mode" => extended,
+	"tweet_mode" => "extended",
 	"screen_name" => "algeki_info",
 	"count" => 100,
 	"q" => implode(" OR ", $search_keywords)
@@ -81,7 +81,7 @@ foreach ($results->statuses as $result) {
 
 		// for testing
 		// echo "<hr/>";
-		// echo "<h1>{$result->id} {$tweet_type} / {$tweetFormat}</h1>";
+		echo "<h1>{$result->id} {$tweet_type} / {$tweetFormat}</h1>";
 		// for testing
 
 		switch ($tweetFormat) {

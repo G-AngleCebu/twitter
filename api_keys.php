@@ -1,7 +1,5 @@
 <?php
 
-error_reporting(0);
-
 // algeki_info
 
 // define('CONSUMER_KEY', 'qfo8TJlLKD49hdJXqrV7yKPTU');

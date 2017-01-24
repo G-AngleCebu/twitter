@@ -3,9 +3,10 @@ require_once 'twitteroauth.php';
 date_default_timezone_set("Asia/Tokyo");
 
 include_once 'api_keys.php';
+$toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
 
 function search(array $query){
-	$toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
+	global $toa;
 	return $toa->get('statuses/user_timeline', $query);
 }
 
@@ -39,7 +40,7 @@ include_once "tweetFormats_B.php";
 /*eunicecode*/
 
 // $query = array("tweet_mode" => extended,"screen_name" => "algeki_info", "count" => 100);
-$query = array("tweet_mode" => extended,"screen_name" => "gec_dev", "count" => 100);
+$query = array("tweet_mode" => "extended","username" => "gec_dev", "screen_name" => "gec_dev", "count" => 100);
 
 $results = search($query);
 $tweetCt = count($results);
@@ -48,19 +49,34 @@ $today = strtotime(date('Y/m/d H:i'));
 
 // for testing
 // echo json_encode($results);exit;
+// for testing
 
 foreach ($results as $result) {
 	$tweetDate = $today - strtotime(formatTwitterDate($result->created_at));
 	// if($tweetDate <= 691200){ 
 
 		$tweet_type = checkTweetType($result);
+
+		// if tweet is a reply, attach the tweet being replied to
+		if($tweet_type == 'reply') {
+			$in_reply_to_tweet = $toa->get('statuses/show/' . $result->in_reply_to_status_id_str);
+
+			// check if there are no errors (e.g. the orig tweet was deleted)
+			if(!isset($in_reply_to_tweet->errors)) {
+				$result->in_reply_to_tweet = $in_reply_to_tweet;
+			}
+		}
+
 		$tweetFormat = checkTweetFormat($tweet_type, $result);
 		$fulltext1 = expandResult($result);
 		$fulltext2 = extendedEntityExpandUrl($result, $fulltext1);
 		$fulltext3 = retweetedExpandUrl($result, $fulltext2);
 		$fulltext = mediaUrls($result, $fulltext3);
 
-		// echo "<h1>{$tweet_type} : {$tweetFormat} / id: {$result->id} </h1>";
+		// for testing
+		echo "<hr/>";
+		echo "<h1>{$tweet_type} : {$tweetFormat} / id: {$result->id} </h1>";
+		// for testing
 
 		switch ($tweetFormat) {
 			case 'A1':
@@ -228,6 +244,5 @@ foreach ($results as $result) {
 	// }	
 	/*eunicecode*/
 }
-
 
 ?>

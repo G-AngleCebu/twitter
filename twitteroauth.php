@@ -1,4 +1,5 @@
 <?php
+// error_reporting(0);
 
 /*
  * Abraham Williams (abraham@abrah.am) http://abrah.am

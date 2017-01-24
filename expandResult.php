@@ -34,7 +34,7 @@
 	}
 
 	function extendedEntityExpandUrl($tweet, $txt){
-		if($exct = count($tweet->extended_entities->media) > 0):
+		if(isset($tweet->extended_entities) && isset($tweet->extended_entities->media) && $exct = count($tweet->extended_entities->media) > 0):
 			for($j=0; $j<$exct; $j++){
 				$shortened_url = $tweet->extended_entities->media[$j]->url;
 				$expanded_url = '<a class="extended_entity" href="'.$tweet->extended_entities->media[$j]->expanded_url.'">'.$tweet->extended_entities->media[$j]->expanded_url.'</a>';
@@ -47,8 +47,10 @@
 
 	//retweeted urls
 	function retweetedExpandUrl($tweet){
-		$text = $tweet->retweeted_status->full_text;
+		$text = "";
+
 		if(isset($tweet->retweeted_status)):
+			$text = $tweet->retweeted_status->full_text;
 			$text = expandResult($tweet->retweeted_status, $text);
 			$text = mediaUrls($tweet->retweeted_status, $text);
 			$text = extendedEntityExpandUrl($tweet->retweeted_status, $text);
@@ -67,12 +69,11 @@
 		return $text;
 	}
 	function mediaUrls($tweet, $txt){
-		if($c = count($tweet->entities->media) > 0):
+		if(isset($tweet->entities->media) && $c = count($tweet->entities->media) > 0):
 			for($i=0; $i < $c; $i++){
 				$shortened_url = $tweet->entities->media[$i]->url;
 				$expanded_url = '<a class="entity" href="'.$tweet->entities->media[$i]->expanded_url.'">'.$tweet->entities->media[$i]->expanded_url.'</a>';
-
-				$txt = str_replace($shortened_url, $expand_url, $txt);
+				$txt = str_replace($shortened_url, $expanded_url, $txt);
 			}
 		endif;
 

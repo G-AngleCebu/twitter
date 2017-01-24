@@ -8,7 +8,7 @@ define('CONSUMER_SECRET', 'd4dm11GrAO7DVOD7afpQmJrtsR1At5stK0qDmtCRkJflRorhat');
 define('ACCESS_TOKEN', '168614971-pmsnz4mKwpEl9qQ6mlf4fsNs4VOF1HOIxnssukt4');
 define('ACCESS_TOKEN_SECRET', 'k7f1PL8UabqDU7T5prddvTqFg0HWbtGejNVHKtjTjvHEP');
 
-$search_keywords = array('アル劇★','youtube');
+$search_keywords = array('アル劇★','test');
 // $search_keywords = array('こんにちは','テスト');
 // $search_keywords = array("#mobile", "#app");
 
@@ -56,7 +56,7 @@ include_once "tweetFormats_B.php";
 /*eunicecode*/
 
 $query = array(
-	"tweet_mode" => extended,
+	// "tweet_mode" => "extended",
 	"screen_name" => "algeki_info",
 	"count" => 100,
 	"q" => implode(" OR ", $search_keywords)
@@ -87,8 +87,8 @@ foreach ($results->statuses as $result) {
 		$fulltext = mediaUrls($result, $fulltext3);
 
 		// for testing
-		// echo "<hr/>";
-		// echo "<h1>{$result->id} {$tweet_type} / {$tweetFormat}</h1>";
+		echo "<hr/>";
+		echo "<h1>{$result->id} {$tweet_type} / {$tweetFormat}</h1>";
 		// for testing
 
 		switch ($tweetFormat) {

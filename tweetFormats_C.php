@@ -2,11 +2,12 @@
 
 
 
-	function formatWithImage_C($tweet, $text){
+	function formatWithImage_C($tweet){
 		// echo 'hello';
 		include_once "formatJapaneseDate.php";
 		$header = headerFormat($tweet) . headerFormat_retweetWithComment($tweet);
-		$retweet_urls = getMediaUrls_comment($tweet);
+		// $retweet_urls = getMediaUrls_comment($tweet);
+		$retweet_urls = '';
 		$text = reverseEngineer(quotedExpandUrl($tweet));
 		
 		$formatted = $header.'<p class="retweet_txt">
@@ -28,7 +29,7 @@
 		$text = reverseEngineer(quotedExpandUrl($tweet));
 		$header = headerFormat($tweet) . headerFormat_retweetWithComment($tweet);
 		$footer = formatFooter($tweet);
-		$retweet_urls =$tweet->quoted_status->entities->media[0]->display_url;
+		$retweet_urls = $tweet->quoted_status->entities->media[0]->display_url;
 
 		$formatted = $header . '<p class="retweet_txt">' . $text . '<a href="' . $retweet_urls . '" target="_blank">' . $retweet_urls . '</a></p>' . $footer;
 		return $formatted;
@@ -36,9 +37,10 @@
 
 	function formatTweet_c2($tweet){
 		include_once "formatJapaneseDate.php";
-		$formatted = formatWithImage_C($tweet, $text) . '<section class="twitter_img_01">';
+		$formatted = formatWithImage_C($tweet) . '<section class="twitter_img_01">';
 		$footer = formatFooter($tweet);
-		$mediaUrl = $tweet->quoted_status->extended_entitites->media[0]->media_url;
+
+		$mediaUrl = $tweet->quoted_status->extended_entities->media[0]->media_url;
 
 		if($mediaUrl != ''){
 			$content = file_get_contents($mediaUrl);
@@ -57,7 +59,7 @@
 
 	function formatTweet_c3($tweet){
 		include_once "formatJapaneseDate.php";
-		$formatted = formatWithImage_C($tweet, $text) . '<section class="twitter_img_02">';
+		$formatted = formatWithImage_C($tweet) . '<section class="twitter_img_02">';
 		$footer = formatFooter($tweet);
 		for($i=0;$i<1;$i++){
 			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
@@ -88,7 +90,7 @@
 
 	function formatTweet_c4($tweet){
 		include_once "formatJapaneseDate.php";
-		$formatted = formatWithImage_C($tweet, $text) . '<section class="twitter_img_03">';
+		$formatted = formatWithImage_C($tweet) . '<section class="twitter_img_03">';
 		$footer = formatFooter($tweet);
 		for($i=0;$i<1;$i++){
 			$mediaUrl = $tweet->quoted_status->extended_entities->media[$i]->media_url;
@@ -121,7 +123,7 @@
 
 	function formatTweet_c5($tweet){
 		include_once "formatJapaneseDate.php";
-		$formatted = formatWithImage_C($tweet, $text) . '<section class="twitter_img_04">';
+		$formatted = formatWithImage_C($tweet) . '<section class="twitter_img_04">';
 		$footer = formatFooter($tweet);
 		$formatted .= '<div class="left">';
 		for($i=0;$i<2;$i++){
@@ -158,9 +160,10 @@
 		$videoUrl = $tweet->quoted_status->extended_entities->media[0]->expanded_url;
 		$displayUrl = $tweet->quoted_status->extended_entities->media[0]->display_url;
 		$mediaUrl = $tweet->quoted_status->extended_entities->media[0]->media_url;
+		$retweet_text = $tweet->quoted_status->full_text;
 
 		$formatted = $header . '<p class="retweet_txt">'
-					.nl2br($text).'</p><div class="twitter_movie"><a href="'.$videoUrl.'" target="_blank">'.$displayUrl.'</a><img src="'.$mediaUrl.'"></div>'.$footer;
+					.nl2br($retweet_text).'</p><div class="twitter_movie"><a href="'.$videoUrl.'" target="_blank">'.$displayUrl.'</a><img src="'.$mediaUrl.'"></div>'.$footer;
 
 		return $formatted;
 	}

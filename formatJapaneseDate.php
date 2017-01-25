@@ -54,7 +54,7 @@
 					<a href="https://twitter.com/'. $screen_name .'?lang=ja" target="_blank">'.$user_name.' @'.$screen_name.'</a><!--User Name-->
 					<span class="story_date"><a href="https://twitter.com/'.$screen_name.'/status/'.$tweet_id.'" target="_blank">'.$post_date.'</a></span><!--Tweet date-->
 					</h2>
-					<p class="story_cat">★アル劇</p><!--keyword-->';
+					<!--<p class="story_cat">★アル劇</p>--><!--keyword-->';
 
 		return $header;
 	}
@@ -104,7 +104,7 @@
 		// $retweet_urls = "https://".$tweet->quoted_status->entities->media[0]->display_url;
 		$retweet_user = $tweet->quoted_status->user->screen_name;
 		$retweet_date = formatRetweetTime($tweet->quoted_status->created_at);
-		$retweet_quoted_text = $tweet->full_text;
+		$retweet_quoted_text = extractTweetTextOnly($tweet);
 
 		$headerB = $retweet_quoted_text;
 		$headerB .= '<div class="retweet_article">
@@ -117,18 +117,26 @@
 
 	}
 
+	// return only text from the tweet->full_text
+	// i.e. removing the t.co links
+	function extractTweetTextOnly($tweet){
+		return substr($tweet->full_text, $tweet->display_text_range[0], $tweet->display_text_range[1]);
+	}
 
 	function getMediaUrls_comment($tweet){
 		$ct = count($tweet->quoted_status->extended_entities->media);
 		$urls = "";
 
-		for($i=0; $i < $ct; $i++){
-			if($tweet->quoted_status->extended_entities->media[$i]->display_url != ''):
-				$url = "https://".$tweet->quoted_status->extended_entities->media[$i]->display_url;
-				$format = ' <a href="'.$url.'" target="_blank">'.$url.'</a>';
-				$urls .= $format;
-			endif;
-		}
+		// for($i=0; $i < $ct; $i++){
+		// 	if($tweet->quoted_status->extended_entities->media[$i]->display_url != ''):
+		// 		$url = "https://".$tweet->quoted_status->extended_entities->media[$i]->display_url;
+		// 		$format = ' <a href="'.$url.'" target="_blank">'.$url.'</a>';
+		// 		$urls .= $format;
+		// 	endif;
+		// }
+
+		$url = "https://".$tweet->quoted_status->extended_entities->media[0]->display_url;
+		$urls = ' <a href="'.$url.'" target="_blank">'.$url.'</a>';
 
 		return $urls;
 	}

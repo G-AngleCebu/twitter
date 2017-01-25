@@ -34,16 +34,25 @@ function checkTweetFormat($type, $tweet){
 		$entity_urls = $tweet->quoted_status->entities->urls;
 	}
 	// if tweet is a reply
-	else if ($letter == 'D') {
-		if(isset($tweet->in_reply_to_tweet)) {
-			// check if replied to tweet has extended_entities and extended_entities->media
-			if(isset($tweet->in_reply_to_tweet->extended_entities) && isset($tweet->in_reply_to_tweet->extended_entities->media)) {
-				$media = $tweet->in_reply_to_tweet->extended_entities->media;
-			}
+	// else if ($letter == 'D') {
+	// 	if(isset($tweet->in_reply_to_tweet)) {
+	// 		// check if replied to tweet has extended_entities and extended_entities->media
+	// 		if(isset($tweet->in_reply_to_tweet->extended_entities) && isset($tweet->in_reply_to_tweet->extended_entities->media)) {
+	// 			$media = $tweet->in_reply_to_tweet->extended_entities->media;
+	// 		}
 
-			$entity_urls = $tweet->in_reply_to_tweet->entities->urls;
+	// 		$entity_urls = $tweet->in_reply_to_tweet->entities->urls;
+	// 	}
+	// }
+	else if($letter == 'B') {
+		// check if tweet has extended_entities and extended_entities->media
+		if(isset($tweet->retweeted_status->extended_entities) && isset($tweet->retweeted_status->extended_entities->media)) {
+			$media = $tweet->retweeted_status->extended_entities->media;
 		}
-	} else {
+
+		$entity_urls = $tweet->retweeted_status->entities->urls;
+	}
+	else {
 		// check if tweet has extended_entities and extended_entities->media
 		if(isset($tweet->extended_entities) && isset($tweet->extended_entities->media)) {
 			$media = $tweet->extended_entities->media;
@@ -51,8 +60,6 @@ function checkTweetFormat($type, $tweet){
 
 		$entity_urls = $tweet->entities->urls;
 	}
-
-	// echo json_encode($tweet);
 
 	if(isset($tweet->full_text) && count($media) == 0): //text only
 		$urls = "";

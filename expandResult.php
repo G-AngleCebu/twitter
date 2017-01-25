@@ -1,4 +1,5 @@
 <?php 
+	// expand urls for normal tweets
 	function expandResult($tweet){
 
 		$text = $tweet->full_text;
@@ -8,7 +9,6 @@
 				$shortened_url = $tweet->entities->urls[$i]->url;
 				$expanded_url = '<a href="'.$tweet->entities->urls[$i]->expanded_url.'">'.$tweet->entities->urls[$i]->expanded_url.'</a>';
 				$text = str_replace($shortened_url, $expanded_url, $text);
-
 			}
 		endif;
 		$text = mediaUrls($tweet, $text);
@@ -45,7 +45,7 @@
 		return $txt;
 	}
 
-	//retweeted urls
+	// expand urls in retweeted tweet
 	function retweetedExpandUrl($tweet){
 		$text = "";
 
@@ -59,6 +59,7 @@
 	}
 
 
+	// expand urls in quoted tweet
 	function quotedExpandUrl($tweet){
 		$text = $tweet->quoted_status->full_text;
 		
@@ -68,11 +69,14 @@
 	
 		return $text;
 	}
+
+	// convert shortened media urls (e.g. images) to html links
 	function mediaUrls($tweet, $txt){
 		if(isset($tweet->entities->media) && $c = count($tweet->entities->media) > 0):
 			for($i=0; $i < $c; $i++){
 				$shortened_url = $tweet->entities->media[$i]->url;
-				$expanded_url = '<a class="entity" href="'.$tweet->entities->media[$i]->expanded_url.'">'.$tweet->entities->media[$i]->expanded_url.'</a>';
+				$expanded_url = '<a class="entity" href="http://'.$tweet->entities->media[$i]->display_url.'">'.$tweet->entities->media[$i]->display_url.'</a>';
+				// $expanded_url = '';
 				$txt = str_replace($shortened_url, $expanded_url, $txt);
 			}
 		endif;

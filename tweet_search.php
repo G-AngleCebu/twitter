@@ -74,7 +74,7 @@ foreach ($results as $result) {
 		$fulltext = mediaUrls($result, $fulltext3);
 
 		// for testing
-		echo "<hr/><h1>{$tweet_type} : {$tweetFormat} / id: {$result->id} </h1>";
+		// echo "<hr/><h1>{$tweet_type} : {$tweetFormat} / id: {$result->id} </h1>";
 		// for testing
 
 		switch ($tweetFormat) {

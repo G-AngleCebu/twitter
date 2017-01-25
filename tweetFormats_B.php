@@ -156,7 +156,7 @@
 		$headerRetweet = headerFormat_retweet($tweet);
 		$footer = formatFooter($tweet);
 		$header = headerFormat($tweet);
-		$text = $tweet->retweeted_status->full_text;
+		$text = extractTweetTextOnly($tweet->retweeted_status);
 
 		$videoUrl = $tweet->extended_entities->media[0]->expanded_url;
 		$displayUrl = $tweet->extended_entities->media[0]->display_url;
@@ -354,7 +354,8 @@
 		$text = reverseEngineer(retweetedExpandUrl($tweet));
 		$header = headerFormat($tweet);
 		$headerRetweet = headerFormat_retweet($tweet);
-		$urls = getMediaUrls($tweet);
+		// $urls = getMediaUrls($tweet);
+		$urls = '';
 		$formatted = $header.$headerRetweet.'<p class="retweet_txt">'.nl2br($text).$urls.'
 						</p><div id="twitter_img-box">';
 		return $formatted;

@@ -4,7 +4,7 @@ date_default_timezone_set("Asia/Tokyo");
 
 include_once 'api_keys.php';
 
-$search_keywords = array('#こんにちは','#テスト');
+$search_keywords = array('#gecdev');
 
 $toa = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
 

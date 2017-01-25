@@ -15,7 +15,6 @@
 	}
 
 	function formatTweet_a2($tweet){
-		$text = $tweet->full_text;
 		$formatted = formatWithImage($tweet);
 		$mediaUrl = $tweet->extended_entities->media[0]->media_url;
 		if($mediaUrl != ''){
@@ -124,7 +123,7 @@
 
 	function formatTweet_a6($tweet){
 		include_once "formatJapaneseDate.php";
-		$text = expandResult($tweet);
+		$text = extractTweetTextOnly($tweet);
 
 		$header = headerFormat($tweet);
 		$videoUrl = $tweet->extended_entities->media[0]->expanded_url;

@@ -1,9 +1,6 @@
 <?php 
 
-
-
 	function formatWithImage_C($tweet){
-		// echo 'hello';
 		include_once "formatJapaneseDate.php";
 		$header = headerFormat($tweet) . headerFormat_retweetWithComment($tweet);
 		// $retweet_urls = getMediaUrls_comment($tweet);
@@ -29,9 +26,10 @@
 		$text = reverseEngineer(quotedExpandUrl($tweet));
 		$header = headerFormat($tweet) . headerFormat_retweetWithComment($tweet);
 		$footer = formatFooter($tweet);
-		$retweet_urls = $tweet->quoted_status->entities->media[0]->display_url;
+		// $retweet_urls = $tweet->quoted_status->entities->media[0]->display_url;
 
-		$formatted = $header . '<p class="retweet_txt">' . $text . '<a href="' . $retweet_urls . '" target="_blank">' . $retweet_urls . '</a></p>' . $footer;
+		// $formatted = $header . '<p class="retweet_txt">' . $text . '<a href="' . $retweet_urls . '" target="_blank">' . $retweet_urls . '</a></p>' . $footer;
+		$formatted = $header . '<p class="retweet_txt">' . $text . $footer;
 		return $formatted;
 	}
 
@@ -160,7 +158,7 @@
 		$videoUrl = $tweet->quoted_status->extended_entities->media[0]->expanded_url;
 		$displayUrl = $tweet->quoted_status->extended_entities->media[0]->display_url;
 		$mediaUrl = $tweet->quoted_status->extended_entities->media[0]->media_url;
-		$retweet_text = $tweet->quoted_status->full_text;
+		$retweet_text = extractTweetTextOnly($tweet->quoted_status);
 
 		$formatted = $header . '<p class="retweet_txt">'
 					.nl2br($retweet_text).'</p><div class="twitter_movie"><a href="'.$videoUrl.'" target="_blank">'.$displayUrl.'</a><img src="'.$mediaUrl.'"></div>'.$footer;
